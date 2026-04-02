@@ -2,9 +2,9 @@ name: Packages CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, test, dev]
   pull_request:
-    branches: [main]
+    branches: [main, test, dev]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
