@@ -1,5 +1,5 @@
 {
-  "name": "@straton/types",
+  "name": "@straton-finance/types",
   "version": "0.2.0",
   "description": "Shared TypeScript types for the Straton RWAFi platform",
   "private": false,

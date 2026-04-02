@@ -1,4 +1,4 @@
-import { CHAIN_IDS } from '@straton/utils';
+import { CHAIN_IDS } from '@straton-finance/utils';
 import { type Address } from 'viem';
 
 import { getMockUSDCAddress, getMockUSDTAddress } from './addresses';

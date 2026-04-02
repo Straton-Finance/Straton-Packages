@@ -1,5 +1,5 @@
 {
-  "name": "@straton/utils",
+  "name": "@straton-finance/utils",
   "version": "0.2.0",
   "description": "Shared utilities for the Straton RWAFi platform",
   "private": false,

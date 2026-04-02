@@ -21,7 +21,7 @@ jobs:
           node-version: 22
           cache: pnpm
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@straton'
+          scope: '@straton-finance'
 
       - run: pnpm install --frozen-lockfile
 

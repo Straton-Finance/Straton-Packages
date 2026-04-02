@@ -20,7 +20,7 @@ importers:
 
   packages/blockchain:
     dependencies:
-      '@straton/utils':
+      '@straton-finance/utils':
         specifier: workspace:*
         version: link:../utils
     devDependencies:
