@@ -1,0 +1,14 @@
+import { base } from './base.mjs';
+
+/** @type {import("eslint").Linter.Config[]} */
+export const node = [
+  ...base,
+  {
+    rules: {
+      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+    },
+  },
+];
+
+export default node;
