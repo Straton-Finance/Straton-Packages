@@ -4,7 +4,7 @@
 [![Publish](https://github.com/straton-finance/straton-packages/actions/workflows/publish.yml/badge.svg)](https://github.com/straton-finance/straton-packages/actions/workflows/publish.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Shared packages for the **Straton RWAFi** (Real World Asset Finance) platform. This monorepo contains TypeScript libraries consumed by [Straton-Frontend](https://github.com/straton-finance/straton-frontend) and [Straton-Backend](https://github.com/straton-finance/straton-backend), published to GitHub Packages under the `@straton` scope.
+Shared packages for the **Straton RWAFi** (Real World Asset Finance) platform. This repository contains TypeScript libraries consumed by [Straton-Frontend](https://github.com/straton-finance/straton-frontend) and [Straton-Backend](https://github.com/straton-finance/straton-backend), published to GitHub Packages under the `@straton-finance` scope.
 
 ---
 
@@ -12,10 +12,10 @@ Shared packages for the **Straton RWAFi** (Real World Asset Finance) platform. T
 
 | Package | Version | Description |
 | --- | --- | --- |
-| [`@straton/types`](packages/types) | `0.2.0` | TypeScript types — Supabase DB (auto-generated), domain models, API request/response, CMS, blockchain. Zero runtime dependencies. |
-| [`@straton/utils`](packages/utils) | `0.2.0` | Shared utilities — `cn()`, formatting helpers, Zod validation schemas, constants (`CHAIN_IDS`, `CHAIN_NAMES`, `TOKEN_DECIMALS`, etc.). |
-| [`@straton/blockchain`](packages/blockchain) | `0.1.0` | Contract data — deployed addresses per chain, stablecoin registry, ABI definitions (ERC20, RWAToken, Vault, TokenFactory). Peer dep: `viem ^2`. |
-| [`@straton/config`](packages/config) | `0.2.0` | Shared configs — ESLint (base/nextjs/node), TypeScript (base/nextjs/node/react-library), Prettier with Tailwind plugin. |
+| [`@straton-finance/types`](packages/types) | `0.2.0` | TypeScript types — Supabase DB (auto-generated), domain models, API request/response, CMS, blockchain. Zero runtime dependencies. |
+| [`@straton-finance/utils`](packages/utils) | `0.2.0` | Shared utilities — `cn()`, formatting helpers, Zod validation schemas, constants (`CHAIN_IDS`, `CHAIN_NAMES`, `TOKEN_DECIMALS`, etc.). |
+| [`@straton-finance/blockchain`](packages/blockchain) | `0.1.0` | Contract data — deployed addresses per chain, stablecoin registry, ABI definitions (ERC20, RWAToken, Vault, TokenFactory). Peer dep: `viem ^2`. |
+| [`@straton-finance/config`](packages/config) | `0.2.0` | Shared configs — ESLint (base/nextjs/node), TypeScript (base/nextjs/node/react-library), Prettier with Tailwind plugin. |
 
 ---
 
@@ -26,7 +26,7 @@ Shared packages for the **Straton RWAFi** (Real World Asset Finance) platform. T
 Create or update `.npmrc` in your project root:
 
 ```ini
-@straton:registry=https://npm.pkg.github.com
+@straton-finance:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
 ```
 
@@ -40,16 +40,16 @@ export GITHUB_TOKEN=ghp_your_token_here
 
 ```bash
 # Types only (zero deps)
-pnpm add @straton/types
+pnpm add @straton-finance/types
 
 # Utilities
-pnpm add @straton/utils
+pnpm add @straton-finance/utils
 
 # Blockchain (requires viem ^2 as peer)
-pnpm add @straton/blockchain
+pnpm add @straton-finance/blockchain
 
 # Configs (devDependencies)
-pnpm add -D @straton/config
+pnpm add -D @straton-finance/config
 ```
 
 ---
@@ -107,7 +107,7 @@ cd packages/my-package
 # Initialize with the standard structure
 cat > package.json << 'EOF'
 {
-  "name": "@straton/my-package",
+  "name": "@straton-finance/my-package",
   "version": "0.1.0",
   "private": false,
   "main": "./dist/index.js",
@@ -167,7 +167,7 @@ Code change → pnpm changeset → PR → Merge → Tag release → GitHub Actio
 5. **Merge the Version PR**. The publish workflow triggers automatically:
    - Builds all packages.
    - Publishes updated packages to GitHub Packages.
-   - Creates git tags (e.g., `@straton/utils@0.3.0`).
+   - Creates git tags (e.g., `@straton-finance/utils@0.3.0`).
 
 ### Manual publish (emergency)
 
@@ -181,7 +181,7 @@ pnpm changeset publish   # Publish to GitHub Packages
 
 ## Regenerating Supabase Types
 
-The `@straton/types` package includes auto-generated Supabase database types.
+The `@straton-finance/types` package includes auto-generated Supabase database types.
 
 ```bash
 # Ensure you have the Supabase CLI installed and are linked to the project
@@ -191,7 +191,7 @@ npx supabase gen types typescript \
   > packages/types/src/database.ts
 
 # Rebuild the types package
-pnpm --filter @straton/types build
+pnpm --filter @straton-finance/types build
 ```
 
 Run this after any Supabase migration to keep types in sync. Always commit the regenerated file alongside the migration that caused the change.
@@ -211,7 +211,7 @@ cp out/Vault.sol/Vault.json         ../straton-packages/packages/blockchain/src/
 cp out/TokenFactory.sol/TokenFactory.json ../straton-packages/packages/blockchain/src/abi/token-factory.json
 
 # Rebuild
-pnpm --filter @straton/blockchain build
+pnpm --filter @straton-finance/blockchain build
 ```
 
 Update the `addresses.ts` file with any new deployment addresses, organized by chain ID.
@@ -255,10 +255,10 @@ straton-packages/
 │       ├── ci.yml        # Build + lint + test on PRs
 │       └── publish.yml   # Publish to GitHub Packages on merge
 ├── packages/
-│   ├── blockchain/       # @straton/blockchain — ABIs, addresses, stablecoin registry
-│   ├── config/           # @straton/config — ESLint, TypeScript, Prettier configs
-│   ├── types/            # @straton/types — Supabase DB types, domain models, API types
-│   └── utils/            # @straton/utils — cn(), formatters, validators, constants
+│   ├── blockchain/       # @straton-finance/blockchain — ABIs, addresses, stablecoin registry
+│   ├── config/           # @straton-finance/config — ESLint, TypeScript, Prettier configs
+│   ├── types/            # @straton-finance/types — Supabase DB types, domain models, API types
+│   └── utils/            # @straton-finance/utils — cn(), formatters, validators, constants
 ├── turbo.json            # Turborepo pipeline config
 ├── pnpm-workspace.yaml   # pnpm workspace definition
 ├── package.json          # Root package.json
@@ -280,7 +280,7 @@ straton-packages/
 
 ## Supported Chains
 
-The `@straton/blockchain` package includes addresses and stablecoin configs for:
+The `@straton-finance/blockchain` package includes addresses and stablecoin configs for:
 
 | Network | Chain ID | Status |
 | --- | --- | --- |
