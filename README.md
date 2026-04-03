@@ -1,10 +1,10 @@
 # Straton Packages
 
-[![CI](https://github.com/straton-finance/straton-packages/actions/workflows/ci.yml/badge.svg)](https://github.com/straton-finance/straton-packages/actions/workflows/ci.yml)
-[![Publish](https://github.com/straton-finance/straton-packages/actions/workflows/publish.yml/badge.svg)](https://github.com/straton-finance/straton-packages/actions/workflows/publish.yml)
+[![CI](https://github.com/Straton-Finance/Straton-Packages/actions/workflows/ci.yml/badge.svg)](https://github.com/Straton-Finance/Straton-Packages/actions/workflows/ci.yml)
+[![Publish](https://github.com/Straton-Finance/Straton-Packages/actions/workflows/publish.yml/badge.svg)](https://github.com/Straton-Finance/Straton-Packages/actions/workflows/publish.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-Shared packages for the **Straton RWAFi** (Real World Asset Finance) platform. This repository contains TypeScript libraries consumed by [Straton-Frontend](https://github.com/straton-finance/straton-frontend) and [Straton-Backend](https://github.com/straton-finance/straton-backend), published to GitHub Packages under the `@straton-finance` scope.
+Shared packages for the **Straton RWAFi** (Real World Asset Finance) platform. This repository contains TypeScript libraries consumed by [Straton-Frontend](https://github.com/Straton-Finance/Straton-Frontend) and [Straton-Backend](https://github.com/Straton-Finance/Straton-Backend), published to GitHub Packages under the `@straton-finance` scope.
 
 ---
 
@@ -58,7 +58,7 @@ pnpm add -D @straton-finance/config
 
 ### Prerequisites
 
-- **Node.js** >= 18
+- **Node.js** >= 22
 - **pnpm** >= 9
 - **Turborepo** (installed globally or via `npx`)
 
@@ -66,7 +66,7 @@ pnpm add -D @straton-finance/config
 
 ```bash
 # Clone the repo
-git clone git@github.com:straton-finance/straton-packages.git
+git clone git@github.com:Straton-Finance/Straton-Packages.git
 cd straton-packages
 
 # Install dependencies
@@ -200,7 +200,7 @@ Run this after any Supabase migration to keep types in sync. Always commit the r
 
 ## Updating ABIs from Contract Builds
 
-After building or deploying contracts in the [Straton contracts repo](https://github.com/straton-finance/straton-contracts):
+After building or deploying contracts in the [Straton contracts repo](https://github.com/Straton-Finance/Straton-Contracts):
 
 ```bash
 # From the contracts repo, after running `forge build`
@@ -285,12 +285,15 @@ The `@straton-finance/blockchain` package includes addresses and stablecoin conf
 | Network | Chain ID | Status |
 | --- | --- | --- |
 | Ethereum Mainnet | 1 | Planned |
+| Ethereum Sepolia | 11155111 | Testnet |
 | Base | 8453 | Active |
-| Base Sepolia | 84532 | Testnet |
-| Polygon | 137 | Active |
-| Polygon Amoy | 80002 | Testnet |
+| Base Sepolia | 84532 | Testnet (primary) |
+| Polygon | 137 | Planned |
+| Polygon Amoy | 80002 | Testnet (legacy) |
 | Arbitrum One | 42161 | Planned |
+| Arbitrum Sepolia | 421614 | Testnet |
 | Avalanche C-Chain | 43114 | Planned |
+| Avalanche Fuji | 43113 | Testnet |
 
 ---
 
