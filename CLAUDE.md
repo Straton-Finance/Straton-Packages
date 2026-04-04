@@ -56,7 +56,14 @@ Node.js >= 22, pnpm >= 9.15
 
 ## Git Workflow
 
-Never push directly to `main`. Conventional Commits. CI must pass before merge.
+Flow: `dev` -> `test` -> `main`. PR required for `main` and `test`.
+
+**Git hooks (husky):**
+- Pre-commit: `lint-staged` (prettier on staged .ts files)
+- Commit-msg: `commitlint` — conventional commits required
+- Pre-push: `build` + `typecheck`
+
+**Scopes**: types, utils, blockchain, config, deps, ci
 
 ## Related Repos
 

@@ -14,10 +14,21 @@
     "clean": "turbo clean && rm -rf node_modules",
     "changeset": "changeset",
     "version": "changeset version",
-    "publish:packages": "pnpm -r build && pnpm -r publish --no-git-checks"
+    "publish:packages": "pnpm -r build && pnpm -r publish --no-git-checks",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "packages/**/*.ts": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.4.2",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2"
   },
