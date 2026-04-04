@@ -269,12 +269,34 @@ straton-packages/
 
 ## Contributing
 
-1. **Branch** from `main` with a descriptive name: `feat/add-chain-support`, `fix/utils-formatting`.
+### Branch Strategy
+
+```
+feature branches → dev → test → main
+```
+
+| Branch | Protection | Purpose |
+|--------|-----------|---------|
+| `main` | PR required, CI must pass | Production (auto-publish) |
+| `test` | PR required, CI must pass | Staging/QA |
+| `dev` | Open (push directly ok) | Development |
+
+### Git Hooks (Husky)
+
+| Hook | What it does | Speed |
+|------|-------------|-------|
+| Pre-commit | `lint-staged` (prettier on staged .ts files) | <2s |
+| Commit-msg | `commitlint` — enforces conventional commits | <1s |
+| Pre-push | `build` + `typecheck` | ~5s |
+
+### Workflow
+
+1. **Branch** from `dev`: `feat/add-chain-support`, `fix/utils-formatting`.
 2. **Follow** [Conventional Commits](https://www.conventionalcommits.org/): `feat(utils):`, `fix(types):`, `chore(config):`, etc.
+   Scopes: `types`, `utils`, `blockchain`, `config`, `deps`, `ci`
 3. **Create a changeset** (`pnpm changeset`) for any user-facing change.
-4. **Test** your changes locally: `pnpm build && pnpm test && pnpm lint`.
-5. **Open a PR** to `main`. Ensure CI passes before requesting review.
-6. **Do not** publish manually unless coordinated with the team.
+4. **Open a PR** to `dev`. When stable, PR `dev → test → main`.
+5. **Do not** publish manually unless coordinated with the team.
 
 ---
 
