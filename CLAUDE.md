@@ -70,3 +70,9 @@ Flow: `dev` -> `test` -> `main`. PR required for `main` and `test`.
 - [Straton-Frontend](https://github.com/Straton-Finance/Straton-Frontend)
 - [Straton-Backend](https://github.com/Straton-Finance/Straton-Backend)
 - [Straton-Contracts](https://github.com/Straton-Finance/Straton-Contracts)
+
+## Project Vault
+
+Cross-repo planning, audits, ADRs, runbooks, threat model drafts e decision logs vivem em [Straton-COG](https://github.com/Straton-Finance/Straton-COG) — **NÃO neste repo**.
+
+`CLAUDE.md` e `docs/` locais contêm apenas instruções de build/dev/deploy específicas deste repo. Para qualquer planejamento cross-repo, audit, ou decisão arquitetural compartilhada com Felipe/Bruno: consultar e contribuir no Straton-COG.
