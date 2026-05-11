@@ -1,6 +1,6 @@
 {
   "name": "@straton-finance/types",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Shared TypeScript types for the Straton RWAFi platform",
   "private": false,
   "publishConfig": {
@@ -21,7 +21,9 @@
       "require": "./dist/*.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "typecheck": "tsc --noEmit",
@@ -37,6 +39,8 @@
     "viem": "^2.0.0"
   },
   "peerDependenciesMeta": {
-    "viem": { "optional": true }
+    "viem": {
+      "optional": true
+    }
   }
 }
