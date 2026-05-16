@@ -12,8 +12,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "files": [
@@ -36,5 +36,6 @@
   },
   "peerDependencies": {
     "viem": "^2.0.0"
-  }
+  },
+  "module": "./dist/index.mjs"
 }
