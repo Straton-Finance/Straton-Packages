@@ -1,6 +1,6 @@
 {
   "name": "@straton-finance/blockchain",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Contract ABIs, addresses, and stablecoin configs for the Straton RWAFi platform",
   "private": false,
   "publishConfig": {
@@ -12,8 +12,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
   },
   "files": [
@@ -36,5 +36,6 @@
   },
   "peerDependencies": {
     "viem": "^2.0.0"
-  }
+  },
+  "module": "./dist/index.mjs"
 }
