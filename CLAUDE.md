@@ -1,15 +1,15 @@
 # Straton Packages
 
-Shared TypeScript packages for the Straton RWAFi platform, published as public packages on npmjs.com under `@straton-finance/*`.
+Shared TypeScript packages for the Straton RWAFi platform, published as public packages on npmjs.com under `@straton/*`.
 
 ## Packages
 
 | Package | Version | Description |
 |---------|---------|-------------|
-| @straton-finance/types | 0.2.0 | Supabase DB types, domain models, API types. Zero runtime deps. |
-| @straton-finance/utils | 0.2.0 | `cn()`, formatters, Zod validators, constants (`CHAIN_IDS`, `TOKEN_DECIMALS`). |
-| @straton-finance/blockchain | 0.1.0 | Deployed addresses per chain, stablecoin registry, ABIs. Peer dep: viem ^2. |
-| @straton-finance/config | 0.2.0 | ESLint, TypeScript, Prettier shared configs. |
+| @straton/types | 0.2.0 | Supabase DB types, domain models, API types. Zero runtime deps. |
+| @straton/utils | 0.2.0 | `cn()`, formatters, Zod validators, constants (`CHAIN_IDS`, `TOKEN_DECIMALS`). |
+| @straton/blockchain | 0.1.0 | Deployed addresses per chain, stablecoin registry, ABIs. Peer dep: viem ^2. |
+| @straton/config | 0.2.0 | ESLint, TypeScript, Prettier shared configs. |
 
 ## Commands
 
@@ -35,7 +35,7 @@ Registry: public npmjs.com (default). Published via OIDC Trusted Publishing — 
 ```bash
 # After forge build in Straton-Contracts
 cp out/RWAToken.sol/RWAToken.json ../Straton-Packages/packages/blockchain/src/abi/
-pnpm --filter @straton-finance/blockchain build
+pnpm --filter @straton/blockchain build
 ```
 
 **Note**: blockchain package needs new ABIs for STRToken, xSTR, FeeCollector.

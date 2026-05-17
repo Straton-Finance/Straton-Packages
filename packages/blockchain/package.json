@@ -1,5 +1,5 @@
 {
-  "name": "@straton-finance/blockchain",
+  "name": "@straton/blockchain",
   "version": "1.1.1",
   "description": "Contract ABIs, addresses, and stablecoin configs for the Straton RWAFi platform",
   "private": false,
@@ -30,7 +30,7 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "@straton-finance/utils": "workspace:*"
+    "@straton/utils": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

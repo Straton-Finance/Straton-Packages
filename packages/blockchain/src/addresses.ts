@@ -1,4 +1,4 @@
-import { CHAIN_IDS } from "@straton-finance/utils";
+import { CHAIN_IDS } from "@straton/utils";
 
 import type { Address } from "viem";
 

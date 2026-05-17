@@ -1,5 +1,5 @@
 {
-  "name": "@straton-finance/config",
+  "name": "@straton/config",
   "version": "1.1.1",
   "description": "Shared ESLint, TypeScript, and Prettier configs for the Straton platform",
   "private": false,
