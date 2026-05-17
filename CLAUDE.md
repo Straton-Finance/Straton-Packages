@@ -1,6 +1,6 @@
 # Straton Packages
 
-Shared TypeScript packages for the Straton RWAFi platform, published to GitHub Packages under `@straton-finance/*`.
+Shared TypeScript packages for the Straton RWAFi platform, published as public packages on npmjs.com under `@straton-finance/*`.
 
 ## Packages
 
@@ -28,7 +28,7 @@ pnpm changeset      # Create a changeset for versioning
 Code change -> pnpm changeset -> PR to main -> merge -> GitHub Action publishes
 ```
 
-Registry: `@straton-finance:registry=https://npm.pkg.github.com`
+Registry: public npmjs.com (default). Published via OIDC Trusted Publishing — `publish.yml` runs on `v*` tags with no token. Consumers install with no auth (no `.npmrc`, no token). See ADR 0001 Addendum 2026-05-17 in Straton-COG.
 
 ## Updating ABIs from Contracts
 

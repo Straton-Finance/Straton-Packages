@@ -4,7 +4,7 @@
   "commit": false,
   "fixed": [["@straton-finance/types", "@straton-finance/utils", "@straton-finance/blockchain", "@straton-finance/config"]],
   "linked": [],
-  "access": "restricted",
+  "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []

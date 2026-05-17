@@ -4,8 +4,12 @@
   "description": "Shared ESLint, TypeScript, and Prettier configs for the Straton platform",
   "private": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "restricted"
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Straton-Finance/Straton-Packages.git",
+    "directory": "packages/config"
   },
   "files": [
     "eslint",
