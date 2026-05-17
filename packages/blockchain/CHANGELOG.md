@@ -1,4 +1,4 @@
-# @straton-finance/blockchain
+# @straton/blockchain
 
 ## 1.1.1
 
@@ -6,8 +6,8 @@
 
 - 1aec810: Fix `exports` map: `require` pointed to a non-existent `./dist/index.cjs` and `import` pointed to the CJS build. tsup (`--format esm,cjs`, no `"type": "module"`) emits CJS as `index.js` and ESM as `index.mjs` — the map now matches reality (`import → .mjs`, `require → .js`), and a `module` field is added.
 
-  Fixes `ERR_MODULE_NOT_FOUND` for every CJS consumer of `@straton-finance/{blockchain,utils,types}`. Bug present since v1.0.0; surfaced by Straton-Backend (first CJS `require()` consumer).
-  - @straton-finance/utils@1.1.1
+  Fixes `ERR_MODULE_NOT_FOUND` for every CJS consumer of `@straton/{blockchain,utils,types}`. Bug present since v1.0.0; surfaced by Straton-Backend (first CJS `require()` consumer).
+  - @straton/utils@1.1.1
 
 ## 1.1.0
 
@@ -23,21 +23,21 @@
 
 ### Patch Changes
 
-- @straton-finance/utils@1.1.0
+- @straton/utils@1.1.0
 
 ## 1.0.0
 
 ### Major Changes
 
 - 560da47: First stable release published to GitHub Packages.
-  - `@straton-finance/blockchain` exposes Straton contract ABIs (RWAToken, Vault, TokenFactory, ERC20) + per-chain deployed addresses + stablecoin registry. Peer dep: viem ^2.
-  - `@straton-finance/types` exposes Supabase DB types, domain models, shared API types.
-  - `@straton-finance/utils` exposes `cn()`, formatters, Zod validators, chain/token constants.
-  - `@straton-finance/config` exposes shared ESLint, Prettier, TypeScript configs.
+  - `@straton/blockchain` exposes Straton contract ABIs (RWAToken, Vault, TokenFactory, ERC20) + per-chain deployed addresses + stablecoin registry. Peer dep: viem ^2.
+  - `@straton/types` exposes Supabase DB types, domain models, shared API types.
+  - `@straton/utils` exposes `cn()`, formatters, Zod validators, chain/token constants.
+  - `@straton/config` exposes shared ESLint, Prettier, TypeScript configs.
 
-  This enables Straton-Backend to consume `@straton-finance/blockchain` from GitHub Packages and remove the inline ABIs in `services/api/src/lib/{whitelister,minter}.ts` plus the placeholder 501 in `proof-of-reserve` cron.
+  This enables Straton-Backend to consume `@straton/blockchain` from GitHub Packages and remove the inline ABIs in `services/api/src/lib/{whitelister,minter}.ts` plus the placeholder 501 in `proof-of-reserve` cron.
 
 ### Patch Changes
 
 - Updated dependencies [560da47]
-  - @straton-finance/utils@1.0.0
+  - @straton/utils@1.0.0
