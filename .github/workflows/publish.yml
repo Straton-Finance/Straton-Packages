@@ -6,11 +6,11 @@ on:
 
 jobs:
   publish:
-    name: Publish to GitHub Packages
+    name: Publish to npmjs.com (OIDC Trusted Publishing)
     runs-on: ubuntu-latest
     permissions:
+      id-token: write # required for npm OIDC trusted publishing
       contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -18,17 +18,27 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: pnpm
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@straton-finance'
+
+      - name: Use npm >= 11.5.1 (required for trusted publishing)
+        run: npm install -g npm@latest
 
       - run: pnpm install --frozen-lockfile
 
       - name: Build all packages
         run: pnpm -r build
 
-      - name: Publish
-        run: pnpm -r publish --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pack tarballs (resolves workspace: protocol)
+        run: |
+          mkdir -p dist-tarballs
+          for dir in packages/*/; do
+            ( cd "$dir" && pnpm pack --pack-destination "$GITHUB_WORKSPACE/dist-tarballs" )
+          done
+
+      - name: Publish to npmjs.com
+        run: |
+          for tgz in dist-tarballs/*.tgz; do
+            echo "Publishing $tgz"
+            npm publish "$tgz" --access public
+          done

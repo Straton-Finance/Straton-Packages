@@ -4,8 +4,12 @@
   "description": "Contract ABIs, addresses, and stablecoin configs for the Straton RWAFi platform",
   "private": false,
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com",
-    "access": "restricted"
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Straton-Finance/Straton-Packages.git",
+    "directory": "packages/blockchain"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
