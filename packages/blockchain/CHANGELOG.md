@@ -1,5 +1,13 @@
 # @straton/blockchain
 
+## 1.1.2
+
+### Patch Changes
+
+- 3588059: Publish to the public npmjs.com registry via OIDC Trusted Publishing instead of GitHub Packages. Consumers install with no authentication — no `.npmrc` override, no token, no Actions-access grant. See ADR 0001 Addendum 2026-05-17.
+- Updated dependencies [3588059]
+  - @straton/utils@1.1.2
+
 ## 1.1.1
 
 ### Patch Changes
