@@ -27,14 +27,16 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     safeMultisig: ZERO_ADDRESS,
   },
   [CHAIN_IDS.ETHEREUM_SEPOLIA]: {
+    // B1 C2/R3 redeploy (2026-05-18). The pre-B1 stack (0xb229.../0x7f7c...) is
+    // dead on this chain. stfToken was NOT redeployed by B1 — kept.
     stfToken: "0xe1c08ADa94E557CD495657e656c2f3EEB93A4BE3",
-    tbillToken: "0xb2291a301ac47c4351fa424d847407111e604362",
-    tokenFactory: "0xbbf3f31e67a56e76681da8a8f859b156b42b9249",
-    vault: "0x7f7cabcb7f2715ce6f16d371f293425d2368e1e0",
-    mockUSDC: "0x58a030261a940de9606e243a17fbc4454ae3b5d3",
-    mockUSDT: "0xb63e62585cd426e51127fbae632645714d794a25",
+    tbillToken: "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA",
+    tokenFactory: "0x58b345E1018e55dc564aee44F8F58293DF59B167",
+    vault: "0x51C25F00dD5D84cf7604fAB43e2bBAEafFb887D6",
+    mockUSDC: "0xDA9564cF0c56A67071aDe6fc76499417CADBD1DF",
+    mockUSDT: "0xDBf21aB5A0767C737750f560bfAa8F31ed51FDe5",
     sanctionsOracle: ZERO_ADDRESS,
-    safeMultisig: ZERO_ADDRESS,
+    safeMultisig: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
   },
   [CHAIN_IDS.POLYGON_AMOY]: {
     stfToken: ZERO_ADDRESS,
