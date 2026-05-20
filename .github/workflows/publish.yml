@@ -1,5 +1,13 @@
 name: Release
 
+# ⚠️ FILE PATH IS LOAD-BEARING — DO NOT RENAME ⚠️
+# npm Trusted Publisher OIDC configuration on the 4 @straton/* packages is
+# bound to the exact path `.github/workflows/publish.yml`. Renaming this
+# file (e.g., to release.yml) breaks OIDC token matching → publish step
+# fails with `ENEEDAUTH`. If you really must rename, FIRST update the
+# Trusted Publisher config on npmjs.com for ALL 4 packages, THEN rename.
+# Bug history: PR #28 (2026-05-20) recovered from a rename in PR #27.
+#
 # Auto-pilot release pattern (state-of-art 2026 — Next.js, Remix, Vite, SvelteKit
 # all use this). When a PR with a .changeset/*.md file is merged to main:
 #
