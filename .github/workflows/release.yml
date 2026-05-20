@@ -1,0 +1,66 @@
+name: Release
+
+# Auto-pilot release pattern (state-of-art 2026 — Next.js, Remix, Vite, SvelteKit
+# all use this). When a PR with a .changeset/*.md file is merged to main:
+#
+#   1. @changesets/action sees the pending changesets, opens a "Version Packages"
+#      PR that bumps versions and updates CHANGELOG.md.
+#   2. When that Version Packages PR is merged: this same workflow runs again,
+#      detects no pending changesets, and instead invokes the `publish` command
+#      → packs each package, `npm publish` via OIDC trusted publishing →
+#      tags + GitHub releases auto-created.
+#
+# Replaces the previous tag-driven publish.yml which required manual
+# `git tag v1.x.y && git push --tags` and had two bugs (YAML colon syntax;
+# `npm publish path` interpreted as GitHub shorthand). PRs #23, #25, #26
+# documented the recovery from those failures.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # manual re-trigger from any ref
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Open Version PR or Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # @changesets/action creates tags + GH releases
+      pull-requests: write # @changesets/action opens the Version Packages PR
+      id-token: write # required for npm OIDC trusted publishing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # changesets needs full history for changelog
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Use npm >= 11.5.1 (required for OIDC trusted publishing)
+        run: npm install -g npm@latest
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build all packages
+        run: pnpm -r build
+
+      - name: Create Release PR or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset version
+          publish: bash scripts/release-publish.sh
+          commit: "chore: version packages"
+          title: "chore: version packages"
+          createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # NOT setting NODE_AUTH_TOKEN — that would override OIDC.
