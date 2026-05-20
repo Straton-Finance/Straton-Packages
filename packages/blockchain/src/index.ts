@@ -14,6 +14,18 @@ export {
   getSafeMultisigAddress,
 } from "./addresses";
 
+// KAN-17 / OpenAssets vault deployments (separate product line from sTBILL Midas)
+export {
+  type OpenAssetsVaultSlug,
+  type OpenAssetsVaultDeployment,
+  type OpenAssetsChainDeployment,
+  OPENASSETS_VAULT_SLUGS,
+  OPENASSETS_DEPLOYMENTS,
+  getOpenAssetsDeployment,
+  getOpenAssetsVault,
+  hasOpenAssetsDeployment,
+} from "./openassets-vaults";
+
 // Stablecoin configuration
 export {
   type StablecoinConfig,
