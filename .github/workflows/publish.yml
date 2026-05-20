@@ -3,6 +3,7 @@ name: Publish Packages
 on:
   push:
     tags: ['v*']
+  workflow_dispatch: # manual re-trigger from any ref (e.g., re-publish after CI fix)
 
 jobs:
   publish:
@@ -37,8 +38,11 @@ jobs:
           done
 
       - name: Publish to npmjs.com
+        # NOTE: the "./" prefix is REQUIRED — without it, npm interprets
+        # "dist-tarballs/foo.tgz" as a GitHub shorthand (user/repo) and tries
+        # `git ls-remote` instead of treating it as a tarball file path.
         run: |
           for tgz in dist-tarballs/*.tgz; do
-            echo "Publishing $tgz"
-            npm publish "$tgz" --access public
+            echo "Publishing ./$tgz"
+            npm publish "./$tgz" --access public
           done
