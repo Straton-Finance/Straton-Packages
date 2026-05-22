@@ -49,12 +49,18 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     safeMultisig: ZERO_ADDRESS,
   },
   [CHAIN_IDS.BASE_SEPOLIA]: {
+    // B1-on-Base C2/R3 redeploy (2026-05-22). The pre-R3 stack
+    // (0xb229.../0x7f7c...) is dead/orphan on this chain — superseded because its
+    // setWhitelisted required the monolithic AGENT_ROLE (the escalation R3 splits).
+    // stfToken NOT redeployed (kept — verified to have code on Base Sep).
+    // All addresses verified on-chain; tokenFactory recovered via the SREF1 proxy's
+    // on-chain creator. Source: Straton-Backend migration 20260522000000.
     stfToken: "0xe1c08ADa94E557CD495657e656c2f3EEB93A4BE3",
-    tbillToken: "0xb2291a301ac47c4351fa424d847407111e604362",
-    tokenFactory: "0xbbf3f31e67a56e76681da8a8f859b156b42b9249",
-    vault: "0x7f7cabcb7f2715ce6f16d371f293425d2368e1e0",
-    mockUSDC: "0x58a030261a940de9606e243a17fbc4454ae3b5d3",
-    mockUSDT: "0xb63e62585cd426e51127fbae632645714d794a25",
+    tbillToken: "0x04EF2c7F3f13A52c894568bf7eb13cA763AE1115",
+    tokenFactory: "0xceB6FF8545B96A74cbFA27D6cBd57c1dD4370E29",
+    vault: "0x76887836A292136fe86F6354882Ec06A1dfcd1DA",
+    mockUSDC: "0x4df8bE805Fb27B7932A7AB78117Bdcef3bcb1251",
+    mockUSDT: "0xA895b2f89E14Fb1ca83d718A2058B5EF5f0A197F",
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
   },
