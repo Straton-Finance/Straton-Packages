@@ -26,6 +26,9 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      - name: Codegen drift check (deployments)
+        run: pnpm --filter @straton/blockchain codegen:check
+
       - name: Build all packages
         run: pnpm -r build
 

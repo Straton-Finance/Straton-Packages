@@ -1,0 +1,33 @@
+{
+  "_note": "Curated deployment record for the Ethereum Sepolia B1 C2/R3 multi-vault stack (sTBILL). Mirrors the deployments/ convention (cf. multivault-84532.json + openassets-vaults-11155111.json).",
+  "_provenance": "Core addresses carried from @straton/blockchain CONTRACT_ADDRESSES[11155111] (>= 1.3.0), themselves sourced from the B1 C2/R3 redeploy (2026-05-18). Implementations recovered on-chain via the EIP-1967 implementation slot; identityRegistry read via token.identityRegistry() (returns 0x0 — whitelist is an internal per-token mapping, no shared IdentityRegistry, consistent with the 2026-05-26 KYC finding). Every address verified to have non-empty bytecode on Eth Sepolia. The full ERC-3643 registry/module set is not captured here — recover from the deploy broadcast if needed.",
+  "chainId": 11155111,
+  "network": "ethereum-sepolia",
+  "deployedAt": "2026-05-18",
+  "stack": "C2/R3 — TransparentUpgradeableProxy + per-proxy ProxyAdmin owned by TimelockController(48h); operator holds only WHITELIST_AGENT_ROLE + MINTER_ROLE (AGENT_ROLE split via R3); AGENT_ROLE + DEFAULT_ADMIN on the Cold Safe.",
+  "supersedes": {
+    "_reason": "Pre-B1 stack (0xb229.../0x7f7c... — Base Sep) is dead on this chain; stfToken was NOT redeployed by B1 (carried over, verified to have code on Eth Sepolia)."
+  },
+  "governance": {
+    "coldSafe": "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
+    "timelock": "0x19a0f130aa18c774ebfd3163b655c20538f9d9ae"
+  },
+  "contracts": {
+    "stfToken": "0xe1c08ADa94E557CD495657e656c2f3EEB93A4BE3",
+    "tbillToken": "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA",
+    "tokenFactory": "0x58b345E1018e55dc564aee44F8F58293DF59B167",
+    "vault": "0x51C25F00dD5D84cf7604fAB43e2bBAEafFb887D6",
+    "identityRegistry": "0x0000000000000000000000000000000000000000",
+    "mockUSDC": "0xDA9564cF0c56A67071aDe6fc76499417CADBD1DF",
+    "mockUSDT": "0xDBf21aB5A0767C737750f560bfAa8F31ed51FDe5",
+    "sanctionsOracle": "0x0000000000000000000000000000000000000000"
+  },
+  "implementations": {
+    "rwaToken": "0xb7c7b123a26120c29f8b0c5791654cbad3e1c967",
+    "vault": "0xffffaabe4d7bbe034e22806b085c4bc564356e76"
+  },
+  "consumers": {
+    "package": "@straton/blockchain CONTRACT_ADDRESSES[11155111] (>= 1.3.0)",
+    "backend": "Straton-Backend vaults.chain_addresses[11155111] + supported_chains"
+  }
+}
