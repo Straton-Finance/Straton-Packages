@@ -148,7 +148,16 @@ ${govBlocks}
 };
 `;
 
-fs.writeFileSync(OUT, header + body);
+// Formatar com o prettier do repo → saída determinística e idêntica ao que o
+// lint-staged produziria (senão o drift-check do CI quebra).
+const prettier = (await import("prettier")).default;
+const prettierCfg = (await prettier.resolveConfig(OUT)) ?? {};
+const formatted = await prettier.format(header + body, {
+  ...prettierCfg,
+  parser: "typescript",
+});
+
+fs.writeFileSync(OUT, formatted);
 console.log(
   `[codegen] ${OUT} — ${chainIds.length} chains, ${Object.values(vaults).reduce((n, v) => n + Object.keys(v).length, 0)} vaults`,
 );
