@@ -14,7 +14,25 @@ export {
   getSafeMultisigAddress,
 } from "./addresses";
 
-// KAN-17 / OpenAssets vault deployments (separate product line from sTBILL Midas)
+// Unified vault model (codegen de deployments/*.json) — modelo único que
+// converge CONTRACT_ADDRESSES (flat) + OPENASSETS_DEPLOYMENTS (rico).
+// Ver decision 2026-06-01-unified-vault-model-codegen.
+export {
+  type VaultSlug,
+  type VaultDeployment,
+  type VaultGovernance,
+  VAULT_SLUGS,
+  VAULTS,
+  VAULT_GOVERNANCE,
+  getVaultDeployment,
+  listVaultDeployments,
+  vaultSupportedChainIds,
+  getTimelockAddress,
+} from "./vaults";
+
+// KAN-17 / OpenAssets vault deployments (separate product line from sTBILL Midas).
+// @deprecated desde 1.4.0 — usar o modelo unificado acima (getVaultDeployment/VAULTS).
+// Mantido por 1 minor; removido no próximo major.
 export {
   type OpenAssetsVaultSlug,
   type OpenAssetsVaultDeployment,

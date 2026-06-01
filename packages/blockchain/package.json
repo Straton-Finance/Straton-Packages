@@ -24,6 +24,9 @@
     "dist"
   ],
   "scripts": {
+    "codegen:deployments": "node scripts/codegen-deployments.mjs",
+    "codegen:check": "node scripts/codegen-deployments.mjs && git diff --exit-code -- src/generated",
+    "prebuild": "pnpm codegen:deployments",
     "build": "tsup src/index.ts --format esm,cjs --dts",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist",

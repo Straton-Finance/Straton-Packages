@@ -1,0 +1,39 @@
+{
+  "assets": {
+    "USDT": "0x61c57359a81b9c72F210fCAAE706Aaae799303Df",
+    "WETH": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14"
+  },
+  "backendHotKey": "0xc8A0841e703973418B7B5ED95c786c9e20a6eF86",
+  "chainId": 11155111,
+  "complianceModules": {
+    "countryRestrict": "0x7E81D808eC61c0a44e7279f716c21A426566A0F9",
+    "globalRateLimit": "0x83660C2a85b2E8a88Cf75dF8C81c0d16c6B636A9",
+    "maxBalance": "0xDbd657fb091f9C87FFA2B1cc35846C876256B51E",
+    "perInvestorRateLimit": "0x3baCf1B71561467E210BAa51D6650DB5DA99B6b3"
+  },
+  "deployer": "0x00818593B91f78D35766993637f10AA0B0660F8F",
+  "infra": {
+    "claimTopicsRegistry": "0x174589d1C853B4550572Cc61520C7E69D8CAf6b2",
+    "identityRegistry": "0xA880D5c53e1dbe632564b9dc98a04E99F5da0476",
+    "rwaTokenImpl": "0x74a97547C5DA09f276Ba14e7F7Fe2e58C6D8E73F",
+    "tokenFactory": "0x6AF3B0bd4294A54F8E71308080EC118a216900df",
+    "trustedIssuersRegistry": "0x18B63497615Fcf24862cD2C4dD3B7d4d487c9B3E",
+    "vaultFactory": "0x928BDDE5B40Be8fCD3336CF14781B861560532AC",
+    "vaultImpl": "0xdfB44eA93e513c694e638B364a102aF2A63198F0"
+  },
+  "safe": "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
+  "vaults": {
+    "susdt": {
+      "depositAsset": "0x61c57359a81b9c72F210fCAAE706Aaae799303Df",
+      "modularCompliance": "0x05222388001F9eb27Ad5d906F92F4646fe3AfF58",
+      "receiptToken": "0xed138Fea5972f2df30701d1600f5615cdB606724",
+      "vault": "0x09922D7b6dAcF6Bc2055446977b3A0260d6DD168"
+    },
+    "sweth": {
+      "depositAsset": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+      "modularCompliance": "0x12a06A5aAB3E26bC4B326D72A309C641Ec6EE240",
+      "receiptToken": "0x9b400efB3987a271a9609f11E8E52179934De2b5",
+      "vault": "0x35be45bb19C973b2c364490E5603B7926bfdd5B3"
+    }
+  }
+}

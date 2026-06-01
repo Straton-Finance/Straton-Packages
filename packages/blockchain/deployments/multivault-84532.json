@@ -1,0 +1,36 @@
+{
+  "_note": "Curated deployment record for the Base Sepolia C2/R3 multi-vault stack (DeployGovernance + DeployFullStack + TransferToSafe, broadcast 2026-05-22). Mirrors the deployments/ convention (cf. openassets-vaults-11155111.json).",
+  "_provenance": "Reconstructed and verified on-chain because the deploy broadcast was NOT committed (broadcast/ is gitignored). Method: eth_getCode (every address below has non-empty bytecode on Base Sepolia) + Blockscout getcontractcreation (tokenFactory recovered as the SREF1 receipt-token proxy's on-chain creator). Core addresses cross-checked against Straton-Backend migration 20260522000000_base_sep_c2r3_repoint.sql. stfToken was NOT redeployed by this stack (carried over; verified to have code on Base Sepolia). The full ERC-3643 registry/module set (claimTopicsRegistry, trustedIssuersRegistry, modularCompliance, rate-limit modules) is not captured here — only what the package + Backend consume, plus governance/impls; recover from the deploy broadcast if needed.",
+  "chainId": 84532,
+  "network": "base-sepolia",
+  "deployedAt": "2026-05-22",
+  "stack": "C2/R3 — TransparentUpgradeableProxy + per-proxy ProxyAdmin owned by TimelockController(48h); operator holds only WHITELIST_AGENT_ROLE + MINTER_ROLE (AGENT_ROLE split via R3); AGENT_ROLE + DEFAULT_ADMIN on the Cold Safe.",
+  "supersedes": {
+    "tbillToken": "0xb2291a301ac47c4351fa424d847407111e604362",
+    "vault": "0x7f7cabcb7f2715ce6f16d371f293425d2368e1e0",
+    "_reason": "Pre-R3 stack — setWhitelisted gated by the monolithic AGENT_ROLE (the escalation R3 splits). Orphaned on-chain, no longer referenced."
+  },
+  "governance": {
+    "coldSafe": "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
+    "timelock": "0x0Dc5a89D3D940144B35857317cdf6B609568eE17"
+  },
+  "deployer": "0xc8A0841e703973418B7B5ED95c786c9e20a6eF86",
+  "contracts": {
+    "stfToken": "0xe1c08ADa94E557CD495657e656c2f3EEB93A4BE3",
+    "tbillToken": "0x04EF2c7F3f13A52c894568bf7eb13cA763AE1115",
+    "tokenFactory": "0xceB6FF8545B96A74cbFA27D6cBd57c1dD4370E29",
+    "vault": "0x76887836A292136fe86F6354882Ec06A1dfcd1DA",
+    "identityRegistry": "0xD6b9Fb4995D939FE4fF45CF32b1fA530B4F5DA81",
+    "mockUSDC": "0x4df8bE805Fb27B7932A7AB78117Bdcef3bcb1251",
+    "mockUSDT": "0xA895b2f89E14Fb1ca83d718A2058B5EF5f0A197F",
+    "sanctionsOracle": "0x0000000000000000000000000000000000000000"
+  },
+  "implementations": {
+    "rwaToken": "0x5E47691078795939F7B0403C2d592d121Aa8aEdE",
+    "vault": "0x51207738DA07a753b533912f19Cb4aF0dfC99ef5"
+  },
+  "consumers": {
+    "package": "@straton/blockchain CONTRACT_ADDRESSES[84532] (>= 1.3.0)",
+    "backend": "Straton-Backend migration 20260522000000 (vaults.chain_addresses[84532] + supported_chains)"
+  }
+}
