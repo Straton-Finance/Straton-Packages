@@ -32,7 +32,8 @@ describe("getVaultDeployment", () => {
     assert.equal(d.chainId, ETH_SEP);
     assert.equal(d.vault, "0x51C25F00dD5D84cf7604fAB43e2bBAEafFb887D6");
     assert.equal(d.token, "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA");
-    assert.equal(d.depositAsset, "0xDBf21aB5A0767C737750f560bfAa8F31ed51FDe5");
+    // canonical USDT (OpenAssets) — unified per chain; was the dup mockUSDT 0xDBf2 before drop
+    assert.equal(d.depositAsset, "0x61c57359a81b9c72F210fCAAE706Aaae799303Df");
     assert.equal(d.depositAssetDecimals, 6);
   });
 
@@ -42,7 +43,10 @@ describe("getVaultDeployment", () => {
     assert.equal(d.token, "0xed138Fea5972f2df30701d1600f5615cdB606724");
     assert.equal(d.depositAsset, "0x61c57359a81b9c72F210fCAAE706Aaae799303Df");
     assert.equal(d.depositAssetDecimals, 6);
-    assert.equal(d.modularCompliance, "0x05222388001F9eb27Ad5d906F92F4646fe3AfF58");
+    assert.equal(
+      d.modularCompliance,
+      "0x05222388001F9eb27Ad5d906F92F4646fe3AfF58",
+    );
   });
 
   it("retorna o sWETH com WETH como depositAsset e 18 dec", () => {
@@ -94,11 +98,17 @@ describe("vaultSupportedChainIds", () => {
 
 describe("getTimelockAddress", () => {
   it("Eth Sep → TimelockController(48h) canônico", () => {
-    assert.equal(getTimelockAddress(ETH_SEP), "0x19a0f130aa18c774ebfd3163b655c20538f9d9ae");
+    assert.equal(
+      getTimelockAddress(ETH_SEP),
+      "0x19a0f130aa18c774ebfd3163b655c20538f9d9ae",
+    );
   });
 
   it("Base Sep → seu próprio Timelock", () => {
-    assert.equal(getTimelockAddress(BASE_SEP), "0x0Dc5a89D3D940144B35857317cdf6B609568eE17");
+    assert.equal(
+      getTimelockAddress(BASE_SEP),
+      "0x0Dc5a89D3D940144B35857317cdf6B609568eE17",
+    );
   });
 
   it("undefined pra chain sem governance", () => {
@@ -121,7 +131,11 @@ describe("regressão: VAULTS gerado bate com as tabelas legacy", () => {
       const gen = VAULTS[chainId]?.stbill;
       assert.ok(gen, `VAULTS[${chainId}].stbill ausente`);
       assert.equal(gen.vault, legacy.vault, `vault drift chain ${chainId}`);
-      assert.equal(gen.token, legacy.tbillToken, `token drift chain ${chainId}`);
+      assert.equal(
+        gen.token,
+        legacy.tbillToken,
+        `token drift chain ${chainId}`,
+      );
     }
   });
 
@@ -132,8 +146,16 @@ describe("regressão: VAULTS gerado bate com as tabelas legacy", () => {
         assert.ok(gen, `VAULTS[${chainId}].${slug} ausente`);
         assert.equal(gen.vault, v.vault, `${slug} vault drift`);
         assert.equal(gen.token, v.receiptToken, `${slug} token drift`);
-        assert.equal(gen.depositAsset, v.depositAsset, `${slug} depositAsset drift`);
-        assert.equal(gen.modularCompliance, v.modularCompliance, `${slug} compliance drift`);
+        assert.equal(
+          gen.depositAsset,
+          v.depositAsset,
+          `${slug} depositAsset drift`,
+        );
+        assert.equal(
+          gen.modularCompliance,
+          v.modularCompliance,
+          `${slug} compliance drift`,
+        );
       }
     }
   });

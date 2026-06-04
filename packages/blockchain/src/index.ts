@@ -9,8 +9,7 @@ export {
   getTbillTokenAddress,
   getTokenFactoryAddress,
   getVaultAddress,
-  getMockUSDCAddress,
-  getMockUSDTAddress,
+  getCanonicalUSDTAddress,
   getSafeMultisigAddress,
 } from "./addresses";
 

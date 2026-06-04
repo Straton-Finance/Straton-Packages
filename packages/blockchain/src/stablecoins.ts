@@ -1,7 +1,7 @@
 import { CHAIN_IDS } from "@straton/utils";
 import { type Address } from "viem";
 
-import { getMockUSDCAddress, getMockUSDTAddress } from "./addresses";
+import { getCanonicalUSDTAddress } from "./addresses";
 
 export const STABLECOIN_DECIMALS = 6;
 export const RECEIPT_TOKEN_DECIMALS = 18;
@@ -24,15 +24,9 @@ export interface StablecoinConfig {
 export const STABLECOINS_BY_CHAIN: Record<number, StablecoinConfig[]> = {
   [CHAIN_IDS.BASE_SEPOLIA]: [
     {
-      symbol: "USDC",
-      label: "Mock USDC",
-      address: getMockUSDCAddress(CHAIN_IDS.BASE_SEPOLIA),
-      decimals: 6,
-    },
-    {
       symbol: "USDT",
-      label: "Mock USDT",
-      address: getMockUSDTAddress(CHAIN_IDS.BASE_SEPOLIA),
+      label: "USDT",
+      address: getCanonicalUSDTAddress(CHAIN_IDS.BASE_SEPOLIA),
       decimals: 6,
     },
   ],
@@ -52,15 +46,9 @@ export const STABLECOINS_BY_CHAIN: Record<number, StablecoinConfig[]> = {
   ],
   [CHAIN_IDS.ETHEREUM_SEPOLIA]: [
     {
-      symbol: "USDC",
-      label: "Mock USDC",
-      address: getMockUSDCAddress(CHAIN_IDS.ETHEREUM_SEPOLIA),
-      decimals: 6,
-    },
-    {
       symbol: "USDT",
-      label: "Mock USDT",
-      address: getMockUSDTAddress(CHAIN_IDS.ETHEREUM_SEPOLIA),
+      label: "USDT",
+      address: getCanonicalUSDTAddress(CHAIN_IDS.ETHEREUM_SEPOLIA),
       decimals: 6,
     },
   ],
@@ -110,13 +98,8 @@ export function getStablecoinsForChain(chainId: number): StablecoinConfig[] {
  */
 export const STABLECOINS = [
   {
-    symbol: "USDC",
-    label: "Mock USDC",
-    getAddress: () => getMockUSDCAddress(),
-  },
-  {
     symbol: "USDT",
-    label: "Mock USDT",
-    getAddress: () => getMockUSDTAddress(),
+    label: "USDT",
+    getAddress: () => getCanonicalUSDTAddress(),
   },
 ] as const;

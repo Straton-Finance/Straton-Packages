@@ -59,7 +59,7 @@ for (const file of files) {
       chainId: cid,
       vault: j.contracts.vault,
       token: j.contracts.tbillToken,
-      depositAsset: j.contracts.mockUSDT,
+      depositAsset: j.contracts.canonicalUSDT,
       depositAssetDecimals: DEPOSIT_DECIMALS.stbill,
     };
     mergeGov(cid, {
