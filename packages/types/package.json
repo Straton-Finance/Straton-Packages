@@ -1,6 +1,6 @@
 {
   "name": "@straton/types",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Shared TypeScript types for the Straton RWAFi platform",
   "private": false,
   "publishConfig": {
