@@ -9,8 +9,7 @@ export interface ChainContracts {
   tbillToken: Address;
   tokenFactory: Address;
   vault: Address;
-  mockUSDC: Address;
-  mockUSDT: Address;
+  canonicalUSDT: Address;
   sanctionsOracle: Address;
   safeMultisig: Address;
 }
@@ -21,8 +20,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-    mockUSDT: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    canonicalUSDT: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
     sanctionsOracle: "0x40C57923924B5c5c5455c48D93317139ADDaC8fb",
     safeMultisig: ZERO_ADDRESS,
   },
@@ -33,8 +31,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA",
     tokenFactory: "0x58b345E1018e55dc564aee44F8F58293DF59B167",
     vault: "0x51C25F00dD5D84cf7604fAB43e2bBAEafFb887D6",
-    mockUSDC: "0xDA9564cF0c56A67071aDe6fc76499417CADBD1DF",
-    mockUSDT: "0xDBf21aB5A0767C737750f560bfAa8F31ed51FDe5",
+    canonicalUSDT: "0x61c57359a81b9c72F210fCAAE706Aaae799303Df",
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
   },
@@ -43,8 +40,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: ZERO_ADDRESS,
   },
@@ -59,8 +55,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: "0x04EF2c7F3f13A52c894568bf7eb13cA763AE1115",
     tokenFactory: "0xceB6FF8545B96A74cbFA27D6cBd57c1dD4370E29",
     vault: "0x76887836A292136fe86F6354882Ec06A1dfcd1DA",
-    mockUSDC: "0x4df8bE805Fb27B7932A7AB78117Bdcef3bcb1251",
-    mockUSDT: "0xA895b2f89E14Fb1ca83d718A2058B5EF5f0A197F",
+    canonicalUSDT: "0xA895b2f89E14Fb1ca83d718A2058B5EF5f0A197F",
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe",
   },
@@ -69,8 +64,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: ZERO_ADDRESS,
   },
@@ -79,8 +73,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: "0x40C57923924B5c5c5455c48D93317139ADDaC8fb",
     safeMultisig: ZERO_ADDRESS,
   },
@@ -89,8 +82,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: ZERO_ADDRESS,
   },
@@ -99,8 +91,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: "0x40C57923924B5c5c5455c48D93317139ADDaC8fb",
     safeMultisig: ZERO_ADDRESS,
   },
@@ -109,8 +100,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: "0x40C57923924B5c5c5455c48D93317139ADDaC8fb",
     safeMultisig: ZERO_ADDRESS,
   },
@@ -119,8 +109,7 @@ export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
     tbillToken: ZERO_ADDRESS,
     tokenFactory: ZERO_ADDRESS,
     vault: ZERO_ADDRESS,
-    mockUSDC: ZERO_ADDRESS,
-    mockUSDT: ZERO_ADDRESS,
+    canonicalUSDT: ZERO_ADDRESS,
     sanctionsOracle: ZERO_ADDRESS,
     safeMultisig: ZERO_ADDRESS,
   },
@@ -160,12 +149,8 @@ export function getVaultAddress(chainId?: number): Address {
   return getContractAddresses(chainId).vault;
 }
 
-export function getMockUSDCAddress(chainId?: number): Address {
-  return getContractAddresses(chainId).mockUSDC;
-}
-
-export function getMockUSDTAddress(chainId?: number): Address {
-  return getContractAddresses(chainId).mockUSDT;
+export function getCanonicalUSDTAddress(chainId?: number): Address {
+  return getContractAddresses(chainId).canonicalUSDT;
 }
 
 export function getSafeMultisigAddress(chainId?: number): Address {

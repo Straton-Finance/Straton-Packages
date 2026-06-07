@@ -27,7 +27,7 @@ export const VAULTS: Record<
       chainId: 11155111,
       vault: "0x51C25F00dD5D84cf7604fAB43e2bBAEafFb887D6" as Address,
       token: "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA" as Address,
-      depositAsset: "0xDBf21aB5A0767C737750f560bfAa8F31ed51FDe5" as Address,
+      depositAsset: "0x61c57359a81b9c72F210fCAAE706Aaae799303Df" as Address,
       depositAssetDecimals: 6,
     },
     susdt: {
