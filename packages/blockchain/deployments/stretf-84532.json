@@ -1,0 +1,14 @@
+{
+  "chainId": 84532,
+  "wrapper": "0xE6639154a0247d9130b0E6abA547Aec2CC35EEbb",
+  "asset": "0xFD02a3151e1Eeb7e057bBa46220531a0F8b14f49",
+  "receipt": "0x82b5D7C12E2fA6666DbBa5282E23d93cf6ae0191",
+  "assetCompliance": "0x69399612805460829e16B3ab10F63871cAa77529",
+  "receiptCompliance": "0x18e345E9E24D9714AA52F84F550f50b03d525714",
+  "identityRegistry": "0x0000000000000000000000000000000000000000",
+  "governance": {
+    "timelock": "0x0Dc5a89D3D940144B35857317cdf6B609568eE17",
+    "proxyAdmin": "0xecc08764Ef4D0958EA52edcE8cB2082ffCb4228f",
+    "coldSafe": "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe"
+  }
+}

@@ -6,6 +6,7 @@
 import type { Address } from "viem";
 
 import type { VaultDeployment, VaultGovernance } from "../vaults";
+import type { StrETFDeployment } from "../stretf";
 
 export const VAULTS: Record<
   number,
@@ -61,5 +62,40 @@ export const VAULT_GOVERNANCE: Record<number, VaultGovernance> = {
   11155111: {
     timelock: "0x19a0f130aa18c774ebfd3163b655c20538f9d9ae" as Address,
     coldSafe: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe" as Address,
+  },
+};
+
+export const STRETF: Record<number, StrETFDeployment> = {
+  84532: {
+    chainId: 84532,
+    wrapper: "0xE6639154a0247d9130b0E6abA547Aec2CC35EEbb" as Address,
+    asset: "0xFD02a3151e1Eeb7e057bBa46220531a0F8b14f49" as Address,
+    receipt: "0x82b5D7C12E2fA6666DbBa5282E23d93cf6ae0191" as Address,
+    assetDecimals: 18,
+    receiptDecimals: 18,
+    assetCompliance: "0x69399612805460829e16B3ab10F63871cAa77529" as Address,
+    receiptCompliance: "0x18e345E9E24D9714AA52F84F550f50b03d525714" as Address,
+    identityRegistry: "0x0000000000000000000000000000000000000000" as Address,
+    governance: {
+      timelock: "0x0Dc5a89D3D940144B35857317cdf6B609568eE17" as Address,
+      proxyAdmin: "0xecc08764Ef4D0958EA52edcE8cB2082ffCb4228f" as Address,
+      coldSafe: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe" as Address,
+    },
+  },
+  11155111: {
+    chainId: 11155111,
+    wrapper: "0x13be13A7838Ec10a3C3e32E7C7f7eBa296bF27F3" as Address,
+    asset: "0x8B43460e5060Bb6b339552a871bEc4f4e459508E" as Address,
+    receipt: "0xe77F232696d7B63D748194a9ebe04557528414dE" as Address,
+    assetDecimals: 18,
+    receiptDecimals: 18,
+    assetCompliance: "0x3FB6DeCcCa17B728a14cfe2e06DfdEd979916401" as Address,
+    receiptCompliance: "0xf4C90B082EF854CBBbc69d90fEE837f7305153d1" as Address,
+    identityRegistry: "0x0000000000000000000000000000000000000000" as Address,
+    governance: {
+      timelock: "0x19A0F130Aa18C774eBfd3163B655C20538F9d9ae" as Address,
+      proxyAdmin: "0x877F63A8e3e5DE6746dB4d668581250814780429" as Address,
+      coldSafe: "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe" as Address,
+    },
   },
 };

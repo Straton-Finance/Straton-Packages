@@ -1,10 +1,11 @@
 // Codegen: gera src/generated/deployments.ts a partir de deployments/*.json.
 //
 // Os JSONs (espelhados de Straton-Contracts/deployments/) são a FONTE CANÔNICA
-// de endereços. Este script normaliza as duas shapes heterogêneas — o "curated
-// record" multi-vault (multivault-<chainId>.json: { contracts, governance }) e o
-// rico por-slug do KAN-17 (openassets-vaults-<chainId>.json: { vaults, safe }) —
-// num modelo único `VaultDeployment` por slug.
+// de endereços. Este script normaliza as shapes heterogêneas — o "curated
+// record" multi-vault (multivault-<chainId>.json: { contracts, governance }), o
+// rico por-slug do KAN-17 (openassets-vaults-<chainId>.json: { vaults, safe }) e
+// o wrapper composável strETF (stretf-<chainId>.json: { wrapper, asset, receipt,
+// ... }) — em `VaultDeployment` por slug + `StrETFDeployment` por chain.
 //
 // Determinístico: chainIds em ordem numérica, slugs na ordem de VAULT_SLUGS.
 // O CI roda `pnpm codegen:check` (regenera + git diff) pra matar drift.
@@ -26,10 +27,16 @@ const VAULT_SLUGS = ["stbill", "susdt", "sweth"];
 // stbill/susdt aceitam USDT (6); sweth aceita WETH (18).
 const DEPOSIT_DECIMALS = { stbill: 6, susdt: 6, sweth: 18 };
 
+// strETF: asset e receipt são ERC-3643 18-dec (garantido on-chain pelo
+// StrETFWrapper__DecimalsMismatch); não vem no JSON — constante conhecida.
+const STRETF_DECIMALS = { asset: 18, receipt: 18 };
+
 /** @type {Record<number, Record<string, object>>} */
 const vaults = {};
 /** @type {Record<number, { timelock?: string, coldSafe?: string }>} */
 const governance = {};
+/** @type {Record<number, object>} */
+const stretf = {};
 
 function mergeGov(cid, next) {
   const cur = governance[cid] ?? {};
@@ -72,7 +79,9 @@ for (const file of files) {
   if (j.vaults && typeof j.vaults === "object") {
     for (const [slug, v] of Object.entries(j.vaults)) {
       if (!VAULT_SLUGS.includes(slug)) {
-        throw new Error(`${file}: slug desconhecido '${slug}' (não está em VAULT_SLUGS)`);
+        throw new Error(
+          `${file}: slug desconhecido '${slug}' (não está em VAULT_SLUGS)`,
+        );
       }
       vaults[cid][slug] = {
         slug,
@@ -85,6 +94,29 @@ for (const file of files) {
       };
     }
     mergeGov(cid, { coldSafe: j.safe });
+  }
+
+  // Shape C — strETF composable wrapper: { wrapper, asset, receipt, ... }
+  if (j.wrapper) {
+    if (stretf[cid]) {
+      throw new Error(`${file}: strETF duplicado para chainId ${cid}`);
+    }
+    stretf[cid] = {
+      chainId: cid,
+      wrapper: j.wrapper,
+      asset: j.asset,
+      receipt: j.receipt,
+      assetDecimals: STRETF_DECIMALS.asset,
+      receiptDecimals: STRETF_DECIMALS.receipt,
+      assetCompliance: j.assetCompliance,
+      receiptCompliance: j.receiptCompliance,
+      identityRegistry: j.identityRegistry,
+      governance: {
+        timelock: j.governance?.timelock,
+        proxyAdmin: j.governance?.proxyAdmin,
+        coldSafe: j.governance?.coldSafe,
+      },
+    };
   }
 }
 
@@ -104,6 +136,24 @@ function emitVault(v) {
     lines.push(`      modularCompliance: "${v.modularCompliance}" as Address,`);
   }
   return `    ${v.slug}: {\n${lines.join("\n")}\n    },`;
+}
+
+function emitStrETF(cid, d) {
+  const g = d.governance ?? {};
+  return [
+    `  ${cid}: {`,
+    `    chainId: ${d.chainId},`,
+    `    wrapper: "${d.wrapper}" as Address,`,
+    `    asset: "${d.asset}" as Address,`,
+    `    receipt: "${d.receipt}" as Address,`,
+    `    assetDecimals: ${d.assetDecimals},`,
+    `    receiptDecimals: ${d.receiptDecimals},`,
+    `    assetCompliance: "${d.assetCompliance}" as Address,`,
+    `    receiptCompliance: "${d.receiptCompliance}" as Address,`,
+    `    identityRegistry: "${d.identityRegistry}" as Address,`,
+    `    governance: { timelock: ${A(g.timelock)}, proxyAdmin: ${A(g.proxyAdmin)}, coldSafe: ${A(g.coldSafe)} },`,
+    `  },`,
+  ].join("\n");
 }
 
 const chainIds = Object.keys(vaults)
@@ -128,6 +178,13 @@ const govBlocks = chainIds
   })
   .join("\n");
 
+const stretfChainIds = Object.keys(stretf)
+  .map(Number)
+  .sort((a, b) => a - b);
+const stretfBlocks = stretfChainIds
+  .map((cid) => emitStrETF(cid, stretf[cid]))
+  .join("\n");
+
 const header = `// AUTO-GENERATED por scripts/codegen-deployments.mjs — NÃO EDITAR À MÃO.
 // Fonte: deployments/*.json (espelho de Straton-Contracts/deployments/).
 // Regenerar: pnpm --filter @straton/blockchain codegen:deployments
@@ -136,6 +193,7 @@ const header = `// AUTO-GENERATED por scripts/codegen-deployments.mjs — NÃO E
 import type { Address } from "viem";
 
 import type { VaultDeployment, VaultGovernance } from "../vaults";
+import type { StrETFDeployment } from "../stretf";
 `;
 
 const body = `
@@ -145,6 +203,10 @@ ${vaultBlocks}
 
 export const VAULT_GOVERNANCE: Record<number, VaultGovernance> = {
 ${govBlocks}
+};
+
+export const STRETF: Record<number, StrETFDeployment> = {
+${stretfBlocks}
 };
 `;
 
@@ -159,5 +221,5 @@ const formatted = await prettier.format(header + body, {
 
 fs.writeFileSync(OUT, formatted);
 console.log(
-  `[codegen] ${OUT} — ${chainIds.length} chains, ${Object.values(vaults).reduce((n, v) => n + Object.keys(v).length, 0)} vaults`,
+  `[codegen] ${OUT} — ${chainIds.length} chains, ${Object.values(vaults).reduce((n, v) => n + Object.keys(v).length, 0)} vaults, ${stretfChainIds.length} strETF`,
 );
