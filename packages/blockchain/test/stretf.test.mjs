@@ -24,21 +24,20 @@ const UNCONFIGURED = 1; // Ethereum mainnet — sem strETF deployado
 const ZERO = "0x0000000000000000000000000000000000000000";
 
 describe("getStrETFDeployment", () => {
-  it("Eth Sepolia: wrapper/asset/receipt + decimais 18/18 + IR legacy 0x0", () => {
+  it("Eth Sepolia: MockOAVault asset (permissionless, assetCompliance 0x0) + receipt 18/18 + IR legacy 0x0", () => {
     const d = getStrETFDeployment(ETH_SEP);
     assert.equal(d.chainId, ETH_SEP);
-    assert.equal(d.wrapper, "0x13be13A7838Ec10a3C3e32E7C7f7eBa296bF27F3");
-    assert.equal(d.asset, "0x8B43460e5060Bb6b339552a871bEc4f4e459508E");
-    assert.equal(d.receipt, "0xe77F232696d7B63D748194a9ebe04557528414dE");
+    assert.equal(d.wrapper, "0x5606980Bfcbe16C3dCa40546Db3bfb33CeA8Aa41");
+    assert.equal(d.asset, "0x1A6F04B379Bb982c4B946E8D7011BA0D1115167C");
+    assert.equal(d.receipt, "0x0Df2052fD89b31499db57e43A95C747F9317C0c7");
     assert.equal(d.assetDecimals, 18);
     assert.equal(d.receiptDecimals, 18);
-    assert.equal(
-      d.assetCompliance,
-      "0x3FB6DeCcCa17B728a14cfe2e06DfdEd979916401",
-    );
+    // Asset = MockOAVault (ERC-4626-style, permissionless) → NO ModularCompliance.
+    // The permissioned perimeter lives only in the strETF receipt (Gui 2026-06-14: OA = ERC-4626).
+    assert.equal(d.assetCompliance, ZERO);
     assert.equal(
       d.receiptCompliance,
-      "0xf4C90B082EF854CBBbc69d90fEE837f7305153d1",
+      "0xd6993c71255c255F2755f5d52B2593CF4c3df604",
     );
     assert.equal(d.identityRegistry, ZERO); // regime de whitelist plana (v1 by design)
   });
@@ -46,7 +45,7 @@ describe("getStrETFDeployment", () => {
   it("Eth Sepolia: governança ProxyAdmin→Timelock (verificada on-chain)", () => {
     const g = getStrETFDeployment(ETH_SEP).governance;
     assert.equal(g.timelock, "0x19A0F130Aa18C774eBfd3163B655C20538F9d9ae");
-    assert.equal(g.proxyAdmin, "0x877F63A8e3e5DE6746dB4d668581250814780429");
+    assert.equal(g.proxyAdmin, "0x06391aBeEDF7fCE20209911034416B901Cee2B9c");
     assert.equal(g.coldSafe, "0x2f2171D6b92F8c7230dcd0084f33A083589bAFfe");
   });
 
