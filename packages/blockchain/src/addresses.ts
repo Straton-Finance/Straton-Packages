@@ -14,6 +14,11 @@ export interface ChainContracts {
   safeMultisig: Address;
 }
 
+/**
+ * @deprecated desde 1.4.0 — registry flat single-vault. Use o modelo unificado
+ * `VAULTS`/`getVaultDeployment`/`listVaultDeployments` (de `./vaults`). Mantido
+ * por 1 minor; removido no próximo major. O FE já migrou.
+ */
 export const CONTRACT_ADDRESSES: Record<number, ChainContracts> = {
   [CHAIN_IDS.ETHEREUM]: {
     stfToken: ZERO_ADDRESS,
@@ -133,10 +138,18 @@ export function getContractAddresses(chainId?: number): ChainContracts {
   return addresses;
 }
 
+/**
+ * @deprecated desde 1.4.0 — parte do registry flat legado (`CONTRACT_ADDRESSES`).
+ * STF é o token de governança (sem equivalente no modelo de vault); será removido no próximo major.
+ */
 export function getStfTokenAddress(chainId?: number): Address {
   return getContractAddresses(chainId).stfToken;
 }
 
+/**
+ * @deprecated desde 1.4.0 — use o modelo unificado `getVaultDeployment(slug, chainId).token`
+ * (de `./vaults`). Single-vault/flat; será removido no próximo major. O FE já migrou.
+ */
 export function getTbillTokenAddress(chainId?: number): Address {
   return getContractAddresses(chainId).tbillToken;
 }
@@ -145,6 +158,10 @@ export function getTokenFactoryAddress(chainId?: number): Address {
   return getContractAddresses(chainId).tokenFactory;
 }
 
+/**
+ * @deprecated desde 1.4.0 — use `getVaultDeployment(slug, chainId).vault` (de `./vaults`).
+ * Single-vault/flat; será removido no próximo major. O FE já migrou.
+ */
 export function getVaultAddress(chainId?: number): Address {
   return getContractAddresses(chainId).vault;
 }

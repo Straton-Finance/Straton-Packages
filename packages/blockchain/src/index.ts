@@ -43,6 +43,18 @@ export {
   hasOpenAssetsDeployment,
 } from "./openassets-vaults";
 
+// strETF — wrapper composável ERC-3643 (StrETFWrapper). Product line própria,
+// não é VaultSlug. Ver src/stretf.ts.
+export {
+  type StrETFDeployment,
+  type StrETFGovernance,
+  type StrETFUnwrapStatus,
+  STRETF,
+  getStrETFDeployment,
+  listStrETFDeployments,
+  stretfSupportedChainIds,
+} from "./stretf";
+
 // Stablecoin configuration
 export {
   type StablecoinConfig,
@@ -64,3 +76,4 @@ export { stfTokenAbi } from "./abi/stf-token";
 export { xstfAbi } from "./abi/xstf";
 export { stfVestingAbi } from "./abi/stf-vesting";
 export { feeCollectorAbi } from "./abi/fee-collector";
+export { stretfWrapperAbi } from "./abi/stretf-wrapper";
