@@ -17,10 +17,12 @@
     "tbillToken": "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA",
     "tokenFactory": "0x58b345E1018e55dc564aee44F8F58293DF59B167",
     "vault": "0x51C25F00dD5D84cf7604fAB43e2bBAEafFb887D6",
+    "modularCompliance": "0xAa2425AFb81f3121353644025c0dEeB79135ce37",
     "identityRegistry": "0x0000000000000000000000000000000000000000",
     "canonicalUSDT": "0x61c57359a81b9c72F210fCAAE706Aaae799303Df",
     "sanctionsOracle": "0x0000000000000000000000000000000000000000"
   },
+  "_modularCompliance_note": "sTBILL token.compliance() on Eth Sepolia, verified on-chain 2026-06-17 (getModules() = [0x76093134EE1FFD21F83d2fc0b506475E6804BDd2, 0x0E5e13a8a37B86A3c5F0e0103e90b2E412efEdca]). Enables the FE mint pre-check via globalRateLimitModuleAbi / perInvestorRateLimitModuleAbi.getRemainingMintCapacity — susdt/sweth already carry modularCompliance in openassets-vaults-11155111.json.",
   "implementations": {
     "rwaToken": "0xb7c7b123a26120c29f8b0c5791654cbad3e1c967",
     "vault": "0xffffaabe4d7bbe034e22806b085c4bc564356e76"

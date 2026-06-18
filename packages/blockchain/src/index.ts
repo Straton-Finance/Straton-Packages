@@ -77,3 +77,12 @@ export { xstfAbi } from "./abi/xstf";
 export { stfVestingAbi } from "./abi/stf-vesting";
 export { feeCollectorAbi } from "./abi/fee-collector";
 export { stretfWrapperAbi } from "./abi/stretf-wrapper";
+// ERC-3643 compliance: ModularCompliance + the read-side of the modules a FE
+// needs to pre-check a mint (rate-limit remaining capacity, max balance)
+// BEFORE asking the user to sign. Mint reverts on the per-investor rate limit
+// (PerInvestorRateLimit__MintLimitExceeded), not MaxBalance (which is skipped
+// on mint). See Straton-COG STATE-OF-PLAY 2026-06-18.
+export { modularComplianceAbi } from "./abi/modular-compliance";
+export { globalRateLimitModuleAbi } from "./abi/global-rate-limit-module";
+export { perInvestorRateLimitModuleAbi } from "./abi/per-investor-rate-limit-module";
+export { maxBalanceModuleAbi } from "./abi/max-balance-module";
