@@ -68,6 +68,7 @@ for (const file of files) {
       token: j.contracts.tbillToken,
       depositAsset: j.contracts.canonicalUSDT,
       depositAssetDecimals: DEPOSIT_DECIMALS.stbill,
+      modularCompliance: j.contracts.modularCompliance,
     };
     mergeGov(cid, {
       timelock: j.governance?.timelock,

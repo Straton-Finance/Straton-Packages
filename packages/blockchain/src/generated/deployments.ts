@@ -30,6 +30,8 @@ export const VAULTS: Record<
       token: "0x82dd8f86C86Db739E96Bd873B368a36E4ad298CA" as Address,
       depositAsset: "0x61c57359a81b9c72F210fCAAE706Aaae799303Df" as Address,
       depositAssetDecimals: 6,
+      modularCompliance:
+        "0xAa2425AFb81f3121353644025c0dEeB79135ce37" as Address,
     },
     susdt: {
       slug: "susdt",
