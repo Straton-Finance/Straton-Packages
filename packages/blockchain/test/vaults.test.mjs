@@ -35,6 +35,10 @@ describe("getVaultDeployment", () => {
     // canonical USDT (OpenAssets) — unified per chain; was the dup mockUSDT 0xDBf2 before drop
     assert.equal(d.depositAsset, "0x61c57359a81b9c72F210fCAAE706Aaae799303Df");
     assert.equal(d.depositAssetDecimals, 6);
+    // modularCompliance asserted explicitly (P1): the drift-regression covered
+    // susdt/sweth but not sTBILL — a silent drift of the sTBILL compliance proxy
+    // would otherwise pass unnoticed. Distinct from susdt's (0x0522…).
+    assert.equal(d.modularCompliance, "0xAa2425AFb81f3121353644025c0dEeB79135ce37");
   });
 
   it("retorna o sUSDT (KAN-17) com modularCompliance e USDT 6 dec", () => {
