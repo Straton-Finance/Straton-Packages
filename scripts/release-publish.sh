@@ -22,5 +22,23 @@ done
 
 for tgz in dist-tarballs/*.tgz; do
   echo "Publishing ./$tgz"
-  npm publish "./$tgz" --access public
+  # Idempotent publish. @changesets/action runs this `publish` step on EVERY main
+  # commit that has no pending changesets — not only on Version-PR merges. A
+  # commit without a version bump re-packs the CURRENT (already-published)
+  # version, and npm 403s with "cannot publish over the previously published
+  # versions". That is a BENIGN no-op (nothing new to release), not a failure —
+  # without this guard the Release run is red on every feature/fix commit, which
+  # masks a REAL publish error (auth/OIDC/build). Skip ONLY that exact error;
+  # every other failure still exits non-zero so genuine problems stay loud.
+  # (Post-publish parse, not a pre-`npm view` check: npm info under-reports a
+  # published version when no "latest" dist-tag exists — a known changesets gotcha.)
+  if out=$(npm publish "./$tgz" --access public 2>&1); then
+    printf '%s\n' "$out"
+  elif printf '%s' "$out" | grep -q "cannot publish over the previously published versions"; then
+    printf '%s\n' "$out"
+    echo "↳ skip: version already on the registry (no changeset → nothing new to publish)"
+  else
+    printf '%s\n' "$out" >&2
+    exit 1
+  fi
 done
